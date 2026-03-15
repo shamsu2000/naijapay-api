@@ -1,3 +1,8 @@
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse # Add this new import!
+import sqlite3
+import pandas as pd
+# ... (your other imports)
 from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -91,3 +96,27 @@ async def process_transfer(transaction: Transaction, db: Session = Depends(get_d
 def get_transaction_logs(db: Session = Depends(get_db)):
     logs = db.query(TransactionLog).order_by(TransactionLog.timestamp.desc()).limit(10).all()
     return logs
+@app.get("/export")
+def export_database():
+    """Extracts the live cloud database and returns it as a CSV file."""
+    try:
+        # 1. Connect to the Render cloud database
+        conn = sqlite3.connect('transactions.db')
+        
+        # 2. Read the data using Pandas
+        query = "SELECT * FROM transaction_logs"
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        
+        # 3. Save it temporarily on the server
+        file_path = "cloud_export.csv"
+        df.to_csv(file_path, index=False)
+        
+        # 4. Prompt the browser to download the file
+        return FileResponse(
+            path=file_path, 
+            media_type="text/csv", 
+            filename="live_cloud_transactions.csv"
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
