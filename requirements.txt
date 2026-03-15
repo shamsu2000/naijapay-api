@@ -5,4 +5,4 @@ pandas
 joblib
 sqlalchemy
 requests
-streamlit
+streamlit>=1.30.0
