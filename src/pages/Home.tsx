@@ -1,8 +1,5 @@
 import { Link } from 'react-router-dom'
-import {
-  Shield, Zap, Globe, Lock, ArrowRight, CheckCircle2,
-  Send, Brain, BarChart3
-} from 'lucide-react'
+import { Shield, Zap, Globe, Lock, ArrowRight, CircleCheck as CheckCircle2, Send, Brain, ChartBar as BarChart3 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 
 const features = [

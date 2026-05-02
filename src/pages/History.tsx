@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Shield, ShieldAlert, CheckCircle2, XCircle, Clock, RefreshCw } from 'lucide-react'
+import { ArrowLeft, Shield, ShieldAlert, CircleCheck as CheckCircle2, Circle as XCircle, Clock, RefreshCw } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 
 interface Transaction {

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Send, Shield, AlertTriangle, CheckCircle2, Loader2, ArrowLeft } from 'lucide-react'
+import { Send, Shield, TriangleAlert as AlertTriangle, CircleCheck as CheckCircle2, Loader as Loader2, ArrowLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 
